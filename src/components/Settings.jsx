@@ -54,10 +54,25 @@ export default function Settings() {
       <section>
         <h2>⚙️ Job Fetching</h2>
 
+        <label className="checkbox-label" style={{flexDirection:'row', alignItems:'center', gap:'10px'}}>
+          <input
+            type="checkbox"
+            checked={settings.entry_only === 'true'}
+            onChange={e => set('entry_only', e.target.checked ? 'true' : 'false')}
+          />
+          <span>Entry level only <small style={{color:'#64748b'}}>(hides Senior, Staff, Lead, Manager, Director, Principal)</small></span>
+        </label>
+
         <label>
           Keywords (comma-separated)
           <input type="text" value={settings.keywords || ''} onChange={e => set('keywords', e.target.value)} placeholder="react,node,electron,javascript" />
           <small>Jobs must match at least one keyword in title, tags, or company.</small>
+        </label>
+
+        <label>
+          Exclude keywords (comma-separated)
+          <input type="text" value={settings.exclude_keywords || ''} onChange={e => set('exclude_keywords', e.target.value)} placeholder="php,wordpress,blockchain" />
+          <small>Jobs matching any of these are hidden.</small>
         </label>
         <label>
           Minimum Salary ($)
