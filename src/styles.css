@@ -130,6 +130,9 @@ body {
   transition: all 0.15s;
 }
 .actions button:hover { background: #2d3148; color: #e2e8f0; }
+.apply-btn { background: #7c8dff !important; color: #fff !important; border-color: #7c8dff !important; font-weight: 600; }
+.apply-btn:hover { background: #6070ee !important; }
+.applied-badge { background: #14532d; color: #4ade80; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; }
 
 /* Settings */
 .settings { max-width: 560px; display: flex; flex-direction: column; gap: 20px; padding: 10px 0; overflow-y: auto; }
@@ -157,3 +160,6 @@ body {
 }
 .save-btn:hover { background: #6070ee; }
 .loading { color: #64748b; padding: 20px; }
+.settings section { display: flex; flex-direction: column; gap: 14px; border: 1px solid #2d3148; border-radius: 10px; padding: 16px; }
+.settings section h2 { font-size: 1rem; color: #c7d2fe; margin-bottom: 2px; }
+.section-desc { font-size: 0.78rem; color: #64748b; margin-top: -8px; }

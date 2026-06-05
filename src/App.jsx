@@ -10,6 +10,7 @@ export default function App() {
   const [view, setView] = useState('jobs'); // 'jobs' | 'applied' | 'settings'
   const [fetching, setFetching] = useState(false);
   const [newAlert, setNewAlert] = useState(0);
+  const [profile, setProfile] = useState({});
 
   const loadJobs = useCallback(async () => {
     const f = view === 'applied' ? { ...filters, applied: true } : filters;
@@ -18,6 +19,10 @@ export default function App() {
   }, [filters, view]);
 
   useEffect(() => { loadJobs(); }, [loadJobs]);
+
+  useEffect(() => {
+    window.radar.getSettings().then(setProfile);
+  }, []);
 
   useEffect(() => {
     window.radar.onNewJobs((count) => {
@@ -64,6 +69,7 @@ export default function App() {
             <Filters filters={filters} onChange={setFilters} />
             <JobList
               jobs={jobs}
+              profile={profile}
               onSeen={handleMarkSeen}
               onApplied={handleMarkApplied}
               onDismiss={handleDismiss}

@@ -25,6 +25,11 @@ export default function Filters({ filters, onChange }) {
         <option value="remotive">Remotive</option>
         <option value="jobicy">Jobicy</option>
       </select>
+      <select value={filters.location || ''} onChange={e => set('location', e.target.value)}>
+        <option value="">All locations</option>
+        <option value="us">🇺🇸 US only</option>
+        <option value="worldwide">🌍 Worldwide</option>
+      </select>
       <label className="checkbox-label">
         <input
           type="checkbox"

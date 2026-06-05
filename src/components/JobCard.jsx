@@ -1,12 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function JobCard({ job, onSeen, onApplied, onDismiss }) {
+export default function JobCard({ job, profile, onSeen, onApplied, onDismiss }) {
+  const [copied, setCopied] = useState(false);
   const tags = job.tags ? job.tags.split(',').filter(Boolean) : [];
   const isNew = !job.seen;
 
   const open = () => {
     window.open(job.url, '_blank');
     onSeen(job.id);
+  };
+
+  const oneClickApply = async () => {
+    const name     = profile?.profile_name    || 'Brian Justice';
+    const email    = profile?.profile_email   || '';
+    const github   = profile?.profile_github  || 'https://github.com/SigynVS';
+    const linkedin = profile?.profile_linkedin|| '';
+    const bio      = profile?.profile_bio     || 'Full stack developer specializing in Electron, React, and Node.js.';
+    const resume   = profile?.profile_resume  || '';
+
+    const letter = `Hi,
+
+${bio}
+
+I'm interested in the ${job.title} role at ${job.company}. My background in React, Node.js, and Electron aligns well with your stack. I write clean, well-documented code and communicate clearly throughout every project.
+
+${github ? `GitHub: ${github}` : ''}${linkedin ? `\nLinkedIn: ${linkedin}` : ''}${resume ? `\nResume: ${resume}` : ''}
+
+Happy to answer any questions.
+
+${name}
+${email}`.trim();
+
+    await navigator.clipboard.writeText(letter);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+
+    // Open job URL
+    window.open(job.url, '_blank');
+    onApplied(job.id);
   };
 
   return (
@@ -21,6 +52,7 @@ export default function JobCard({ job, onSeen, onApplied, onDismiss }) {
           {job.salary_raw && <span className="salary">{job.salary_raw}</span>}
           <span className="source-badge">{job.source}</span>
           {isNew && <span className="new-badge">NEW</span>}
+          {job.applied && <span className="applied-badge">✅ Applied</span>}
         </div>
       </div>
 
@@ -37,9 +69,11 @@ export default function JobCard({ job, onSeen, onApplied, onDismiss }) {
         <div className="actions">
           <button onClick={open}>🔗 View</button>
           {!job.applied && (
-            <button onClick={() => onApplied(job.id)}>✅ Applied</button>
+            <button className="apply-btn" onClick={oneClickApply}>
+              {copied ? '📋 Copied!' : '⚡ Apply'}
+            </button>
           )}
-          <button onClick={() => onDismiss(job.id)}>✕ Dismiss</button>
+          <button onClick={() => onDismiss(job.id)}>✕</button>
         </div>
       </div>
     </div>
