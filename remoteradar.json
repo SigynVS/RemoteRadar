@@ -234,7 +234,7 @@
       "location": "Poland",
       "posted_at": "2026-05-17T16:49:09+00:00",
       "fetched_at": "2026-06-05T02:36:35.468Z",
-      "seen": false,
+      "seen": true,
       "applied": false,
       "dismissed": false
     }
@@ -243,6 +243,12 @@
     "keywords": "react,node,electron,javascript,typescript",
     "min_salary": "0",
     "fetch_interval_hours": "2",
-    "sources": "remoteok,remotive,jobicy"
+    "sources": "remoteok,remotive,jobicy",
+    "profile_name": "Brian Justice",
+    "profile_email": "sheogorath256@gmail.com",
+    "profile_github": "https://github.com/SigynVS",
+    "profile_linkedin": "https://www.linkedin.com/in/brian-justice-96ba36413/",
+    "profile_resume": "",
+    "profile_bio": "Full stack developer specializing in Electron, React, and Node.js."
   }
 }

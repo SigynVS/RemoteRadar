@@ -24,6 +24,9 @@ export default function Filters({ filters, onChange }) {
         <option value="remoteok">RemoteOK</option>
         <option value="remotive">Remotive</option>
         <option value="jobicy">Jobicy</option>
+        <option value="weworkremotely">We Work Remotely</option>
+        <option value="arbeitnow">Arbeitnow</option>
+        <option value="himalayas">Himalayas</option>
       </select>
       <select value={filters.location || ''} onChange={e => set('location', e.target.value)}>
         <option value="">All locations</option>
