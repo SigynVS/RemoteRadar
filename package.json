@@ -1,0 +1,41 @@
+{
+  "name": "remote-radar",
+  "version": "1.0.0",
+  "description": "Remote tech job aggregator with stack filtering and desktop alerts",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently -k -n Vite,Electron -c cyan,yellow \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder --win --x64"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.2.1",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.7",
+    "wait-on": "^8.0.5"
+  },
+  "build": {
+    "appId": "com.remoteradar.app",
+    "productName": "RemoteRadar",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "preload.js", "lib/**", "dist-react/**", "node_modules/**"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "public/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
